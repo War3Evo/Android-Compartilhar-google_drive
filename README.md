@@ -1,31 +1,30 @@
-- O arquivo DW.Androidapi.JNI.Provider.pas da biblioteca KastriFree deve ser atualizado para funcionar nas versões atuais do Android.
-  A linha 28 que contém:
+Modified from original in english
+
+- The KastriFree library DW.Androidapi.JNI.Provider.pas file must be updated to work on current Android versions.
+  Line 28 which contains:
   [JavaSignature('android/support/v4/content/FileProvider')]
-  Deve ser substituída por:
+  It must be replaced by:
   [JavaSignature('androidx/core/content/FileProvider')]
 
-- Em Project > Options > Application > Entitlement List
-  Deve ser marcada como "true" a opção "Secure File Sharing"
-  Isso incluirá automaticamente no AndroidManifest.xml a informação abaixo:
+- In Project > Options > Application > Entitlement List
+  The "Secure File Sharing" option must be set to "true"
+  This will automatically include the information below in AndroidManifest.xml:
 
-  <provider
-  android:name="android.support.v4.content.FileProvider"
-  android:authorities="com.embarcadero.myappname.fileprovider"
-  android:exported="false"
-  android:grantUriPermissions="true">
-  <meta-data
-    android:name="android.support.FILE_PROVIDER_PATHS"
-    android:resource="@xml/provider_paths" />
-  </provider>
+  
+   
+  
+    
+  
+   
 
-  Este provedor é necessário para que as versões mais recentes do Android acessem o arquivo enviado.
-  O provider-paths.xml também é criado e adicionado automaticamente ao Projects > Deployment.
+  This provider is required for newer versions of Android to access the uploaded file.
+  The provider-paths.xml is also created and automatically added to Projects > Deployment.
 
-  Esta aplicação possui a função "findMimeType" que identifica 
-  automaticamente o tipo de arquivo aceito pela diretiva JIntent (exemplo abaixo).
+  This application has the "findMimeType" function that identifies
+  automatically the file type accepted by the JIntent directive (example below).
   intent.setDataAndType(URI, StringToJString('FileType'));
 
-  Para conhecimento, apenas os tipos de arquivo ('FileType') listados abaixo são aceitos:
+  For your information, only the file types ('FileType') listed below are supported:
   image/jpeg
   audio/mpeg4-generic
   text/html
